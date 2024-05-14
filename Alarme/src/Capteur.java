@@ -14,7 +14,7 @@ public abstract class Capteur {
 
     //Methode
     public String toString(){
-        return"Nom :"+nom+"\tLocalisation : "+localisation;
+        return"Nom : "+nom+"\tLocalisation : "+localisation;
     }
 
     public void addMoniteur(Moniteur m){

@@ -17,6 +17,16 @@ public class CapteurGaz extends Capteur {
         return super.toString()+" Type de gaz :"+typeGaz+"\t Niveau :"+niveau+"\t Seuil maximum :"+seuil;
     }
 
+    public void addMoniteur(Moniteur m){
+        if(m instanceof MoniteurB){
+            listeMoniteurs.add(m);
+            System.out.println("\u001B[38;5;10mMoniteur ajouté\u001B[0m");
+        }
+        else{
+            System.out.println("\u001B[38;5;9mErreur - type du moniteur incompatible\u001B[0m"); 
+        }
+    }
+
     public void set(int niv){
         niveau=niv;
         detecterAnomalie();
@@ -24,10 +34,10 @@ public class CapteurGaz extends Capteur {
     
     public void detecterAnomalie(){
         if(niveau>=seuil){
-            System.out.print("Choississez le niveau d'importance(1/2/3)");
+            System.out.print("\u001B[38;5;33mChoississez le niveau d'importance(1/2/3)\u001B[0m");
             String niveauS=System.console().readLine();
             int niveauI=Integer.valueOf(niveauS);
-            System.out.print("Rentrez la date du jour : ");
+            System.out.print("\u001B[38;5;33mRentrez la date du jour : \u001B[0m");
             String date=System.console().readLine();  
             GazEvent g1 = new GazEvent(this,date,localisation,niveauI,typeGaz,niveau);
             for (Moniteur m : listeMoniteurs){

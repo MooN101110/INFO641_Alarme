@@ -14,7 +14,7 @@ public class Moniteur implements AnomalieListener {
     //Methode
     public void nouvelleAnomalie(AnomalieEvent anomalie){
         listeAnomalies.add(anomalie);
-        System.out.println("\u001B[38;5;144mNouvelle Anomalie détéctée\u001B ");
+        System.out.println("Nouvelle Anomalie détéctée");
     }
 
 }
