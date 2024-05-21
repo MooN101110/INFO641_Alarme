@@ -45,9 +45,12 @@ public class Principale {
         capteursR.add(cRB);
         capteursR.add(cRC);
 
-        //Création de la fenetre
-        Fenetre f = new Fenetre(capteursI,capteursR,capteursG);
-		f.setVisible(true);
+        //Création des fenetres
+        FenetreAlarme fA = new FenetreAlarme(capteursI,capteursR,capteursG);
+		fA.setVisible(true);
+
+        FenetreMoniteur fM = new FenetreMoniteur();
+		fM.setVisible(true);
     }
 }
 

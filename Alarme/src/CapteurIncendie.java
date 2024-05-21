@@ -22,10 +22,10 @@ public class CapteurIncendie extends Capteur {
     public void addMoniteur(Moniteur m){
         if(m instanceof MoniteurA){
             listeMoniteurs.add(m);
-            System.out.println("\u001B[38;5;10mMoniteur ajouté\u001B[0m");
+            System.out.println("\u001B[38;5;10m"+super.nom+" -> Moniteur ajouté\u001B[0m");
         }
         else{
-            System.out.println("\u001B[38;5;9mErreur - type du moniteur incompatible\u001B[0m"); 
+            System.out.println("\u001B[38;5;9m"+super.nom+" ->Erreur - type du moniteur incompatible\u001B[0m"); 
         }
     }
 
@@ -55,6 +55,8 @@ public class CapteurIncendie extends Capteur {
                 for (Moniteur m : listeMoniteurs){
                     m.nouvelleAnomalie(e1);
                 }
+                FenetrePopUp f = new FenetrePopUp(e1);
+                f.setVisible(true);
             }
         }
 }

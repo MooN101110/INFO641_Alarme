@@ -8,6 +8,7 @@ public class MoniteurB extends Moniteur{
     //Méthode
     public void nouvelleAnomalie(AnomalieEvent anomalie){
         listeAnomalies.add(anomalie);
+
         if(anomalie instanceof GazEvent){
             if(anomalie.niveauImportance == 1){
                 System.out.println("\u001B[38;5;196mNouvelle Anomalie détéctée - Emission de gaz au dessus des seuils de sécurité\u001B[0m");

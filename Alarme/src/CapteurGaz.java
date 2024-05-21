@@ -54,6 +54,8 @@ public class CapteurGaz extends Capteur {
             for (Moniteur m : listeMoniteurs){
                 m.nouvelleAnomalie(g1);
             }
+            FenetrePopUp f = new FenetrePopUp(g1);
+            f.setVisible(true);
         }
     }
 

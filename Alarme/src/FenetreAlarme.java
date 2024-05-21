@@ -8,7 +8,7 @@ import java.awt.event.ItemListener;
 import java.beans.*;
 import java.util.ArrayList;
 
-public class Fenetre extends JFrame implements ActionListener {
+public class FenetreAlarme extends JFrame implements ActionListener {
 	
 	//Attributs
 		final static int HAUTEUR=500;
@@ -16,11 +16,12 @@ public class Fenetre extends JFrame implements ActionListener {
         private JComboBox jTypeAlarme;
 		
     //Constructeur
-    public Fenetre(ArrayList<CapteurIncendie> capteursI, ArrayList<CapteurRadiation> capteursR, ArrayList<CapteurGaz> capteursG) {
+    public FenetreAlarme(ArrayList<CapteurIncendie> capteursI, ArrayList<CapteurRadiation> capteursR, ArrayList<CapteurGaz> capteursG) {
         //Initialisation fenetre
-        setTitle("Gestion alarme");
+        setTitle("Gestion alarmes");
         setSize(LARGEUR,HAUTEUR);
         this.getContentPane().setBackground(Color.WHITE);
+        this.setLocation(400,100);
 
         JPanel j = new JPanel();
         j.setLayout(new GridLayout(0,1));
