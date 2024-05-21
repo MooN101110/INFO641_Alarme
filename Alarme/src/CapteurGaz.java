@@ -2,31 +2,25 @@ public class CapteurGaz extends Capteur {
     //Attributs
     private int niveau;
     private int seuil;
-    private String typeGaz;
 
     //Constructeur
-    public CapteurGaz(String no,String l,int n, int s,String tg) {
+    public CapteurGaz(String no,String l,int n, int s) {
         super(no,l);
         niveau=n;
         seuil=s;
-        typeGaz=tg;
     }
 
     //Methode
     public String toString(){
-        return super.toString()+" Type de gaz :"+typeGaz+"\t Niveau :"+niveau+"\t Seuil maximum :"+seuil;
+        return super.toString()+"\t Niveau :"+niveau+"\t Seuil maximum :"+seuil;
     }
 
     public void addMoniteur(Moniteur m){
-        if(m instanceof MoniteurB){
             listeMoniteurs.add(m);
-            System.out.println("\u001B[38;5;10mMoniteur ajouté\u001B[0m");
-        }
-        else{
-            System.out.println("\u001B[38;5;9mErreur - type du moniteur incompatible\u001B[0m"); 
-        }
+            System.out.println("\u001B[38;5;10m"+super.nom+" -> Moniteur ajouté\u001B[0m");
+      
     }
-
+    //Quand il n'y a pas d'interface graphique
     public void set(int niv){
         niveau=niv;
         detecterAnomalie();
@@ -39,7 +33,24 @@ public class CapteurGaz extends Capteur {
             int niveauI=Integer.valueOf(niveauS);
             System.out.print("\u001B[38;5;33mRentrez la date du jour : \u001B[0m");
             String date=System.console().readLine();  
+            System.out.print("\u001B[38;5;33mRentrez le type de gaz : \u001B[0m");
+            String typeGaz=System.console().readLine();
             GazEvent g1 = new GazEvent(this,date,localisation,niveauI,typeGaz,niveau);
+            for (Moniteur m : listeMoniteurs){
+                m.nouvelleAnomalie(g1);
+            }
+        }
+    }
+
+    //Pour l'interface
+    public void setInterface(int niv,String date, int niveauI, String typeGaz){
+        niveau=niv;
+        detecterAnomalieInterface(niv, date, niveauI, typeGaz);
+    }
+    
+    public void detecterAnomalieInterface(int niv,String date, int niveauI, String typeGaz){
+        if(niveau>=seuil){
+            GazEvent g1 = new GazEvent(this,date,localisation,niveauI,typeGaz,niv);
             for (Moniteur m : listeMoniteurs){
                 m.nouvelleAnomalie(g1);
             }

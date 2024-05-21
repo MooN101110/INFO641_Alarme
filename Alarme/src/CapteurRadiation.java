@@ -43,4 +43,19 @@ public class CapteurRadiation extends Capteur {
             }
         }
     }
+
+    //Pour l'interface
+    public void setInterface(int niv,String date, int niveauI){
+        niveau=niv;
+        detecterAnomalieInterface(niv, date, niveauI);
+    }
+    
+    public void detecterAnomalieInterface(int niv,String date, int niveauI){
+        if(niveau>=seuil){
+            RadiationEvent g1 = new RadiationEvent(this,date,localisation,niveauI,niv);
+            for (Moniteur m : listeMoniteurs){
+                m.nouvelleAnomalie(g1);
+            }
+        }
+    }
 }

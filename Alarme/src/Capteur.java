@@ -22,4 +22,6 @@ public abstract class Capteur {
     }
     
     public void detecterAnomalie(){};
+
+    public void setInterface(){};
 }

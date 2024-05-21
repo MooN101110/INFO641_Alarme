@@ -42,4 +42,19 @@ public class CapteurIncendie extends Capteur {
             }
         }
     }
+
+        //Pour l'interface
+        public void setInterface(boolean etat,String date, int niveauI){
+            feu=etat;
+            detecterAnomalieInterface( date, niveauI);
+        }
+        
+        public void detecterAnomalieInterface(String date, int niveauI){
+            if(feu){
+                IncendieEvent e1 = new IncendieEvent(this,date,localisation,niveauI);
+                for (Moniteur m : listeMoniteurs){
+                    m.nouvelleAnomalie(e1);
+                }
+            }
+        }
 }
