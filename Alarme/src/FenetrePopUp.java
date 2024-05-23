@@ -59,7 +59,9 @@ public class FenetrePopUp extends JFrame {
         j.add(jbouton);
         this.add(j);
 
-        
+        bOk.addActionListener(e -> {
+            this.dispose();
+         }); 
 
     }
 }

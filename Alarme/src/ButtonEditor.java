@@ -8,12 +8,14 @@ public class ButtonEditor extends DefaultCellEditor
   private MoniteurA moniteurA;
   private MoniteurB moniteurB;
   protected JButton button;
-  
-  public ButtonEditor(JCheckBox checkBox, MoniteurA moniteurA, MoniteurB moniteurB)
+  private JComboBox moniteurs;
+
+  public ButtonEditor(JCheckBox checkBox, MoniteurA moniteurA, MoniteurB moniteurB, JComboBox moniteurs)
   {
     super(checkBox);
     this.moniteurA=moniteurA;
     this.moniteurB=moniteurB;
+    this.moniteurs=moniteurs;
     button = new JButton();
     button.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -36,30 +38,88 @@ public class ButtonEditor extends DefaultCellEditor
     int ligne = tableau.getSelectedRow();
     String type = (String) tableau.getValueAt(ligne, 0);
 
-    if((type=="Incendie") || (type == "Emission de Gaz")){
+    if(type=="Incendie"){
 
         Object[] options = {"Traiter", "Fermer"};
         int choix = JOptionPane.showOptionDialog(button,
-                moniteurA.listeAnomalies.get(ligne).toString(),
+                "Incendie \n"+moniteurA.listeAnomalies.get(ligne).toString(),
                 "Détails de l'anomalie",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.WARNING_MESSAGE,
                 null,
                 options,
                 options[0]);
+
+        //Bouton traiter
+        if(choix==0){
+            moniteurA.traiterAnomalie(moniteurA.listeAnomalies.get(ligne));
+        }
     }
-    else{
+    else if(type=="Radiation"){
         Object[] options = {"Traiter", "Fermer"};
         int choix = JOptionPane.showOptionDialog(button,
-                moniteurB.listeAnomalies.get(ligne).toString(),
+                "Radiation \n"+moniteurB.listeAnomalies.get(ligne).toString(),
                 "Détails de l'anomalie",
                 JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.WARNING_MESSAGE,
                 null,
                 options,
                 options[0]);
-    }
 
+        //Bouton traiter
+        if(choix==0){
+            moniteurB.traiterAnomalie(moniteurB.listeAnomalies.get(ligne));
+        }
+    }
+    else{
+        Moniteur moniteur;
+        if(moniteurs.getSelectedItem()=="Moniteur A"){
+            moniteur=moniteurA;
+        }
+        else{
+           moniteur=moniteurB; 
+        }
+        Object[] options = {"Traiter", "Fermer"};
+        int choix = JOptionPane.showOptionDialog(button,
+                "Emission de Gaz"+moniteur.listeAnomalies.get(ligne).toString(),
+                "Détails de l'anomalie",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        //Bouton traiter
+        if(choix==0){
+            //Appel des deux moniteurs car gaz dans les deux
+            if(moniteurs.getSelectedItem()=="Moniteur A"){
+
+                for(AnomalieEvent event : moniteurB.listeAnomalies){
+                    if((event.date == moniteurA.listeAnomalies.get(ligne).date) &&
+                    (event.localisation == moniteurA.listeAnomalies.get(ligne).localisation) &&
+                    (event.niveauImportance == moniteurA.listeAnomalies.get(ligne).niveauImportance) &&
+                    (event instanceof GazEvent)){
+                        moniteurB.traiterAnomalie(event);
+                    }
+                }
+
+                moniteurA.traiterAnomalie(moniteurA.listeAnomalies.get(ligne));
+            }
+            else{
+
+                for(AnomalieEvent event : moniteurA.listeAnomalies){
+                    if((event.date == moniteurB.listeAnomalies.get(ligne).date) &&
+                    (event.localisation == moniteurB.listeAnomalies.get(ligne).localisation) &&
+                    (event.niveauImportance == moniteurB.listeAnomalies.get(ligne).niveauImportance) &&
+                    (event instanceof GazEvent)){
+                        moniteurA.traiterAnomalie(event);
+                    }
+                }
+
+                moniteurB.traiterAnomalie(moniteurB.listeAnomalies.get(ligne));
+            }    
+        }
+    }
     
     return label;
   }

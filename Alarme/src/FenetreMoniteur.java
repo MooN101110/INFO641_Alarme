@@ -41,7 +41,7 @@ public class FenetreMoniteur extends JFrame implements ActionListener{
         JScrollPane scroll = new JScrollPane(tab_anomalie);
 
         tab_anomalie.getColumn("Détails").setCellRenderer(new ButtonRenderer());
-        tab_anomalie.getColumn("Détails").setCellEditor(new ButtonEditor(new JCheckBox(), moniteurA, moniteurB));
+        tab_anomalie.getColumn("Détails").setCellEditor(new ButtonEditor(new JCheckBox(), moniteurA, moniteurB, cmoniteur));
 
         jMoniteur.add(scroll);
 
@@ -62,6 +62,7 @@ public class FenetreMoniteur extends JFrame implements ActionListener{
                   }
                     
                 }
+                
             }
             else if (cmoniteur.getSelectedItem().equals("Moniteur B")){
                 tableModel.setRowCount(0);

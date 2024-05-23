@@ -32,6 +32,12 @@ public class MoniteurA extends Moniteur{
             }
         }
     }
+
+    public void traiterAnomalie(AnomalieEvent anomalie){
+        if(listeAnomalies.contains(anomalie)){
+            listeAnomalies.remove(anomalie);
+        }  
+    }
     
 
 }
