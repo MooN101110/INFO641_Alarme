@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class FenetrePopUp extends JFrame {
     //Attributs
-    final static int HAUTEUR=350;
+    final static int HAUTEUR=300;
     final static int LARGEUR=350;
 
     public FenetrePopUp(AnomalieEvent anomalie){
@@ -58,6 +58,8 @@ public class FenetrePopUp extends JFrame {
         j.add(jInfo);
         j.add(jbouton);
         this.add(j);
+
+        
 
     }
 }

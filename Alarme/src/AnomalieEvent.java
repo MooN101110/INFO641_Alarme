@@ -17,6 +17,6 @@ public abstract class AnomalieEvent extends EventObject {
 
     //Méthode
     public String toString(){
-        return"Date : "+date+"\tLocalisation : "+localisation+"\tNiveau d'importance : "+niveauImportance;
+        return"Date : "+date+"\nLocalisation : "+localisation+"\nNiveau d'importance : "+niveauImportance;
     }
 }

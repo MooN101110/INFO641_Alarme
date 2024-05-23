@@ -21,18 +21,13 @@ public class FenetreAlarme extends JFrame implements ActionListener {
         setTitle("Gestion alarmes");
         setSize(LARGEUR,HAUTEUR);
         this.getContentPane().setBackground(Color.WHITE);
-        this.setLocation(400,100);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-LARGEUR, dim.height/4);
 
         JPanel j = new JPanel();
         j.setLayout(new GridLayout(0,1));
         JPanel jBase = new JPanel();
-        // //Création bouton menu
-        // JButton bAlarme = new JButton("Génération des alarmes");
-        // JButton bMoniteur= new JButton("Gestion des moniteurs");
-
-        // //Ajout dans la fenêtre
-        // this.add(bAlarme,"West");
-        // this.add(bMoniteur,"East");
 
         //Création des listes déroulantes
         Object[] batiments = new Object[]{"Batiment A","Batiment B","Batiment C"};

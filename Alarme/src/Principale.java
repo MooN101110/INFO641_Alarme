@@ -49,7 +49,7 @@ public class Principale {
         FenetreAlarme fA = new FenetreAlarme(capteursI,capteursR,capteursG);
 		fA.setVisible(true);
 
-        FenetreMoniteur fM = new FenetreMoniteur();
+        FenetreMoniteur fM = new FenetreMoniteur(moniteurA,moniteurB);
 		fM.setVisible(true);
     }
 }
