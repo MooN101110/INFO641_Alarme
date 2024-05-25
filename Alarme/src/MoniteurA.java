@@ -36,6 +36,7 @@ public class MoniteurA extends Moniteur{
     public void traiterAnomalie(AnomalieEvent anomalie){
         if(listeAnomalies.contains(anomalie)){
             listeAnomalies.remove(anomalie);
+            System.out.println("\u001B[38;5;150mAnomalie traitée\u001B[0m");
         }  
     }
     
